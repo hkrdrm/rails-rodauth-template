@@ -7,10 +7,16 @@ Sequel.migration do
       column :password_hash, "text"
     end
     
-    create_table(:sample_posts) do
+    create_table(:comics) do
       primary_key :id
-      column :title, "text"
-      column :body, "text"
+      column :name, "text"
+      column :artist_name, "text"
+      column :description, "text"
+      column :release_date, "date"
+      column :poster_url, "text"
+      column :created_at, "timestamp without time zone"
+      column :updated_at, "timestamp without time zone"
+      column :deleted_at, "timestamp without time zone"
     end
     
     create_table(:schema_migrations) do
@@ -53,12 +59,28 @@ Sequel.migration do
       
       primary_key [:id]
     end
+    
+    create_table(:comic_issues) do
+      primary_key :id
+      foreign_key :comic_id, :comics, :key=>[:id]
+      column :name, "text"
+      column :description, "text"
+      column :issue_number, "text"
+      column :issue_date, "date"
+      column :cover_url, "text"
+      column :image_url, "text"
+      column :grid_rows_x, "integer"
+      column :grid_rows_y, "integer"
+      column :created_at, "timestamp without time zone"
+      column :updated_at, "timestamp without time zone"
+      column :deleted_at, "timestamp without time zone"
+    end
   end
 end
               Sequel.migration do
                 change do
                   self << "SET search_path TO \"$user\", public"
-                  self << "INSERT INTO \"schema_migrations\" (\"filename\") VALUES ('20250513160713_sample_post.rb')"
-self << "INSERT INTO \"schema_migrations\" (\"filename\") VALUES ('20250513161713_create_rodauth.rb')"
+                  self << "INSERT INTO \"schema_migrations\" (\"filename\") VALUES ('20250513161713_create_rodauth.rb')"
+self << "INSERT INTO \"schema_migrations\" (\"filename\") VALUES ('20250513172418_create_comics_and_issues.rb')"
                 end
               end

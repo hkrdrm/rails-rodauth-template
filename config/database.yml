@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  database: rails_rodauth_setup_db
+  database: mocink-final-dev
   user: mocink # Also accept 'username' as key, if both are present 'username' is used
   password: careBear2013!!$$
   host: localhost

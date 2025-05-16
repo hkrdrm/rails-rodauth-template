@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Rails Rodauth Setup" %></title>
+    <title><%= content_for(:title) || "MocInk" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,16 +13,19 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <%= render partial: "layouts/partials/navigation" %>
+
+  <body class="flex flex-col bg-gray-900 text-white min-h-screen">
     <% if notice %>
       <div class="alert alert-success"><%= notice %></div>
     <% end %>
@@ -30,6 +33,16 @@
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
 
-    <%= yield %>
+    <div class="mb-auto">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <div class="flex flex-row items-center justify-center width-full">
+        <%= image_tag("Facebook_Logo_Primary.png", style: 'height:64px; width:64px;', class: "m-16") %>
+        <%= image_tag("Instagram_Glyph_Gradient.png", style: 'height:64px; width:64px;', class: "m-16") %>
+        <%= image_tag("TikTok_Icon_Black_Circle.png", style: 'height:64px; width:64px;', class: "m-16") %>
+      </div>
+    </footer>
   </body>
 </html>

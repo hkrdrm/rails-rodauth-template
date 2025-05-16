@@ -11,4 +11,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  get  "comics"                 => "comics#index",    as: :comics
+  get  "issues"                 => "issues#index",    as: :issues
+  get  "issues/:id"             => "issues#show"
+  get  "dashboard"              => "dashboard#index", as: :dashboard
+  get  "dashboard/new_issue"    => "dashboard#new_issue"
+  post "dashboard/create_issue" => "dashboard#create_issue"
 end
