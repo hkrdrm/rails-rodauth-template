@@ -1,6 +1,18 @@
 class Issue < Sequel::Model(:comic_issues)
   many_to_one :comic
 
+  def previous_issue
+    id - 1
+  end
+
+  def next_issue
+    if Issue.last.id == id
+      return 1
+    else
+      return id + 1
+    end
+  end
+
   def save_image(file)
     filename = SecureRandom.hex(10) + ".png"
 
